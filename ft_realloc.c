@@ -18,10 +18,12 @@ void	*ft_realloc(void *ptr, size_t new_size)
 	void	*new;
 
 	if (ptr == NULL)
-		return (malloc(sizeof(new_size)));
+		return (malloc(new_size));
 	if (!new_size)
 		return (ptr);
 	new = malloc(new_size);
+	if (!new)
+		return (NULL);
 	ft_memcpy(new, ptr, new_size);
 	free(ptr);
 	return (new);
