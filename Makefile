@@ -1,6 +1,7 @@
 # config
 NAME		:= libft.a
 HEADER		:= libft.h
+OBJ_DIR		:= obj
 CC			:= cc
 
 # flags
@@ -8,6 +9,7 @@ CFLAGS		:=
 CFLAGS		+= -Wall
 CFLAGS		+= -Werror
 CFLAGS		+= -Wextra
+#CFLAGS		+= -Wpedantic
 
 CPPFLAGS	:=
 CPPFLAGS	+= -g
@@ -54,39 +56,40 @@ SRC			+= ft_substr.c
 SRC			+= ft_toupper.c
 SRC			+= ft_tolower.c
 
-BONUS_SRC 	:=
-BONUS_SRC	+= ft_lstnew.c
-BONUS_SRC	+= ft_lstadd_front.c
-BONUS_SRC	+= ft_lstsize.c
-BONUS_SRC	+= ft_lstlast.c
-BONUS_SRC	+= ft_lstadd_back.c
-BONUS_SRC	+= ft_lstdelone.c
-BONUS_SRC	+= ft_lstclear.c
-BONUS_SRC	+= ft_lstiter.c
-BONUS_SRC	+= ft_lstmap.c
+# list
+SRC			+= ft_lstnew.c
+SRC			+= ft_lstadd_front.c
+SRC			+= ft_lstsize.c
+SRC			+= ft_lstlast.c
+SRC			+= ft_lstadd_back.c
+SRC			+= ft_lstdelone.c
+SRC			+= ft_lstclear.c
+SRC			+= ft_lstiter.c
+SRC			+= ft_lstmap.c
 
-OBJ = $(SRC:.c=.o)
-BONUS_OBJ = $(SRC:.c=.o) $(BONUS_SRC:.c=.o)
+OBJ			:= $(SRC:.c=.o)
+OBJ			:= $(addprefix $(OBJ_DIR)/, $(OBJ))
 
 all: $(NAME)
-
-bonus: $(BONUS_OBJ)
-	ar rc $(NAME) $(BONUS_OBJ)
 
 $(NAME): $(OBJ)
 	ar rc $(NAME) $(OBJ)
 
-%.o: %.c $(HEADER)
-	$(CC) $(CFLAGS) -c $< -o $@
+$(OBJ_DIR)/%.o: %.c $(HEADER) | $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
 
 clean:
-	rm -f $(OBJ) $(BONUS_OBJ)
+	rm -f $(OBJ)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	rm -f $(NAME)
 
 re:
-	make fclean
-	make all
+	@make fclean
+	@make all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re
