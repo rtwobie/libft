@@ -25,7 +25,7 @@ static char	**malloc_arr(const char *s, char c)
 	size = 0;
 	while (s[i])
 	{
-		if (!ft_strchr(&c, s[i]) && \
+		if (s[i] != c && \
 			(s[i + 1] == c || s[i + 1] == '\0'))
 			size++;
 		i++;
