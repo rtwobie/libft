@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rha-le <rha-le@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/20 14:45:35 by rha-le            #+#    #+#             */
-/*   Updated: 2025/01/23 00:15:04 by rha-le           ###   ########.fr       */
+/*   Created: 2025/03/09 17:55:05 by rha-le            #+#    #+#             */
+/*   Updated: 2025/03/09 18:37:55 by rha-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include <stddef.h>
 
-# include <stdint.h>
-
-typedef enum e_type
+/** Erases the data in the n bytes of a memory location.
+ *
+ *	@param s: The pointer where to start from.
+ *	@param n: The number of bytes to erase.
+ *
+ *	@returns: None.
+ */
+void	ft_bzero(void *s, size_t n)
 {
-	SIGN,
-	UNSIGN
-}	t_type;
+	unsigned char	*us;
 
-typedef union u_type
-{
-	long			slong;
-	uintptr_t		ptr;
-}	t_uni;
-
-int	ft_printf(const char *format, ...);
-
-#endif
+	us = (unsigned char *)s;
+	while (n--)
+		*us++ = 0;
+}

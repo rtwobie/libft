@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rha-le <rha-le@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/20 14:45:35 by rha-le            #+#    #+#             */
-/*   Updated: 2025/01/23 00:15:04 by rha-le           ###   ########.fr       */
+/*   Created: 2024/12/06 19:17:20 by rha-le            #+#    #+#             */
+/*   Updated: 2024/12/06 19:47:27 by rha-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
 
-# include <stdint.h>
-
-typedef enum e_type
+/**
+ * Counts the number of nodes in a list.
+ *
+ * @param lst The beginning of the list.
+ * @return The length of the list
+ */
+int	ft_lstsize(t_list *lst)
 {
-	SIGN,
-	UNSIGN
-}	t_type;
+	int	i;
 
-typedef union u_type
-{
-	long			slong;
-	uintptr_t		ptr;
-}	t_uni;
-
-int	ft_printf(const char *format, ...);
-
-#endif
+	i = 0;
+	while (lst != NULL)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
+}

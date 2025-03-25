@@ -1,32 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rha-le <rha-le@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/20 14:45:35 by rha-le            #+#    #+#             */
-/*   Updated: 2025/01/23 00:15:04 by rha-le           ###   ########.fr       */
+/*   Created: 2024/12/04 18:56:04 by rha-le            #+#    #+#             */
+/*   Updated: 2025/02/04 12:37:53 by rha-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
+#include <unistd.h>
 
-# include <stdint.h>
-
-typedef enum e_type
+int	ft_putstr_fd(char *s, int fd)
 {
-	SIGN,
-	UNSIGN
-}	t_type;
-
-typedef union u_type
-{
-	long			slong;
-	uintptr_t		ptr;
-}	t_uni;
-
-int	ft_printf(const char *format, ...);
-
-#endif
+	return ((int)write(fd, s, ft_strlen(s)));
+}

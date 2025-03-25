@@ -1,32 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rha-le <rha-le@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/20 14:45:35 by rha-le            #+#    #+#             */
-/*   Updated: 2025/01/23 00:15:04 by rha-le           ###   ########.fr       */
+/*   Created: 2025/03/09 14:53:16 by rha-le            #+#    #+#             */
+/*   Updated: 2025/03/09 15:17:54 by rha-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-
-# include <stdint.h>
-
-typedef enum e_type
+int	ft_isalpha(int c)
 {
-	SIGN,
-	UNSIGN
-}	t_type;
-
-typedef union u_type
-{
-	long			slong;
-	uintptr_t		ptr;
-}	t_uni;
-
-int	ft_printf(const char *format, ...);
-
-#endif
+	return ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'));
+}

@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rha-le <rha-le@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/20 14:45:35 by rha-le            #+#    #+#             */
-/*   Updated: 2025/01/23 00:15:04 by rha-le           ###   ########.fr       */
+/*   Created: 2024/10/15 20:11:27 by rha-le            #+#    #+#             */
+/*   Updated: 2025/02/13 17:58:19 by rha-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
 
-# include <stdint.h>
-
-typedef enum e_type
+long	ft_atol(const char *nptr)
 {
-	SIGN,
-	UNSIGN
-}	t_type;
+	long	num;
+	long	sign;
 
-typedef union u_type
-{
-	long			slong;
-	uintptr_t		ptr;
-}	t_uni;
-
-int	ft_printf(const char *format, ...);
-
-#endif
+	while (ft_isspace(*nptr))
+		++nptr;
+	sign = 1;
+	if (*nptr == '+' || *nptr == '-')
+	{
+		if (*nptr == '-')
+			sign = -1;
+		++nptr;
+	}
+	num = 0;
+	while (ft_isdigit(*nptr))
+	{
+		num = (num * 10) + (*nptr - '0');
+		++nptr;
+	}
+	return (num * sign);
+}

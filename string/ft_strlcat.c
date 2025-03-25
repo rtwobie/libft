@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rha-le <rha-le@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/20 14:45:35 by rha-le            #+#    #+#             */
-/*   Updated: 2025/01/23 00:15:04 by rha-le           ###   ########.fr       */
+/*   Created: 2025/03/20 14:34:22 by rha-le            #+#    #+#             */
+/*   Updated: 2025/03/20 16:23:37 by rha-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include <stddef.h>
+#include "libft.h"
 
-# include <stdint.h>
-
-typedef enum e_type
+size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {
-	SIGN,
-	UNSIGN
-}	t_type;
+	size_t	i;
+	size_t	j;
 
-typedef union u_type
-{
-	long			slong;
-	uintptr_t		ptr;
-}	t_uni;
-
-int	ft_printf(const char *format, ...);
-
-#endif
+	i = 0;
+	while (dest[i] && i < size)
+		i++;
+	j = 0;
+	while (src[j] && (i + j + 1) < size)
+	{
+		dest[i + j] = src[j];
+		j++;
+	}
+	if (i < size)
+		dest[i + j] = '\0';
+	return (i + ft_strlen(src));
+}

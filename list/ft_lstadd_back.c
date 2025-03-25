@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rha-le <rha-le@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/20 14:45:35 by rha-le            #+#    #+#             */
-/*   Updated: 2025/01/23 00:15:04 by rha-le           ###   ########.fr       */
+/*   Created: 2024/12/06 19:47:53 by rha-le            #+#    #+#             */
+/*   Updated: 2024/12/07 15:24:20 by rha-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
 
-# include <stdint.h>
-
-typedef enum e_type
+/** Adds a node at the end of the list.
+ *
+ *	@param lst:	A pointer to the beginning of a list.
+ *	@param node:	The node to be added to the list.
+ *
+ *	@returns:	None.
+ */
+void	ft_lstadd_back(t_list **lst, t_list *node)
 {
-	SIGN,
-	UNSIGN
-}	t_type;
-
-typedef union u_type
-{
-	long			slong;
-	uintptr_t		ptr;
-}	t_uni;
-
-int	ft_printf(const char *format, ...);
-
-#endif
+	if (*lst == NULL)
+		*lst = node;
+	else
+		ft_lstlast(*lst)->next = node;
+}

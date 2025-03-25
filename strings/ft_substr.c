@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rha-le <rha-le@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/20 14:45:35 by rha-le            #+#    #+#             */
-/*   Updated: 2025/01/23 00:15:04 by rha-le           ###   ########.fr       */
+/*   Created: 2025/03/24 23:03:54 by rha-le            #+#    #+#             */
+/*   Updated: 2025/03/25 00:18:42 by rha-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
+#include <stdlib.h>
 
-# include <stdint.h>
-
-typedef enum e_type
+char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
-	SIGN,
-	UNSIGN
-}	t_type;
+	char	*substr;
+	size_t	size;
 
-typedef union u_type
-{
-	long			slong;
-	uintptr_t		ptr;
-}	t_uni;
-
-int	ft_printf(const char *format, ...);
-
-#endif
+	while (*s && start--)
+		++s;
+	size = ft_strlen(s);
+	if (size < len)
+		len = size;
+	substr = malloc(sizeof(*substr) * (len + 1));
+	if (!substr)
+		return (NULL);
+	if (!len)
+		*substr = 0;
+	else
+		ft_strlcpy(substr, s, len + 1);
+	return (substr);
+}

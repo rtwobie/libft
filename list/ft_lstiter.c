@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rha-le <rha-le@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/20 14:45:35 by rha-le            #+#    #+#             */
-/*   Updated: 2025/01/23 00:15:04 by rha-le           ###   ########.fr       */
+/*   Created: 2024/12/07 15:18:46 by rha-le            #+#    #+#             */
+/*   Updated: 2024/12/07 15:27:32 by rha-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
 
-# include <stdint.h>
-
-typedef enum e_type
+/** Iterates the list ’lst’ and applies the function ’f’
+ *	on the content of each node.
+ *
+ *	@param lst:	A pointer to the beginning of a list.
+ *	@param f:	The function used to iterate on the list.
+ *
+ *	@returns:	None.
+ */
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	SIGN,
-	UNSIGN
-}	t_type;
+	t_list	*temp;
 
-typedef union u_type
-{
-	long			slong;
-	uintptr_t		ptr;
-}	t_uni;
-
-int	ft_printf(const char *format, ...);
-
-#endif
+	while (lst)
+	{
+		temp = lst;
+		lst = temp->next;
+		f(temp->content);
+	}
+}

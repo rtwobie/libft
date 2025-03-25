@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rha-le <rha-le@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/20 14:45:35 by rha-le            #+#    #+#             */
-/*   Updated: 2025/01/23 00:15:04 by rha-le           ###   ########.fr       */
+/*   Created: 2025/03/25 00:01:27 by rha-le            #+#    #+#             */
+/*   Updated: 2025/03/25 00:44:53 by rha-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include <stddef.h>
+#include "libft.h"
 
-# include <stdint.h>
-
-typedef enum e_type
+char	*ft_strtrim(const char *s, const char *set)
 {
-	SIGN,
-	UNSIGN
-}	t_type;
+	char	*res;
+	size_t	end;
 
-typedef union u_type
-{
-	long			slong;
-	uintptr_t		ptr;
-}	t_uni;
-
-int	ft_printf(const char *format, ...);
-
-#endif
+	while (*s && ft_strchr(set, *s))
+		++s;
+	if (!*s)
+		return (ft_strdup(""));
+	end = ft_strlen(s);
+	while (ft_strchr(set, s[end]))
+		end--;
+	res = ft_substr(s, 0, (end + 1));
+	return (res);
+}

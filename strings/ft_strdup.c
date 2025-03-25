@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rha-le <rha-le@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/20 14:45:35 by rha-le            #+#    #+#             */
-/*   Updated: 2025/01/23 00:15:04 by rha-le           ###   ########.fr       */
+/*   Created: 2025/03/24 22:31:52 by rha-le            #+#    #+#             */
+/*   Updated: 2025/03/25 00:33:54 by rha-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
+#include <stdlib.h>
 
-# include <stdint.h>
-
-typedef enum e_type
+char	*ft_strdup(const char *src)
 {
-	SIGN,
-	UNSIGN
-}	t_type;
+	char	*dest;
+	char	*i;
 
-typedef union u_type
-{
-	long			slong;
-	uintptr_t		ptr;
-}	t_uni;
-
-int	ft_printf(const char *format, ...);
-
-#endif
+	dest = malloc(sizeof(*dest) * (ft_strlen(src) + 1));
+	if (!dest)
+		return (NULL);
+	i = dest;
+	while (*src)
+		*i++ = *src++;
+	*i = 0;
+	return (dest);
+}
