@@ -23,6 +23,8 @@ char	*ft_strrchr(const char *s, int c)
 {
 	char	*last;
 
+	if (!s)
+		return (0);
 	last = NULL;
 	while (*s)
 		if (*s++ == (char)c)
