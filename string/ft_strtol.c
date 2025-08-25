@@ -47,7 +47,7 @@ static int	_signed(const char **nptr, int base)
 	return (sign);
 }
 
-static long	_erange(long sign, long num, int c, int base)
+static long	_check_erange(long sign, long num, int c, int base)
 {
 	if (sign == 1 && (num > LONG_MAX / base
 			|| (num == LONG_MAX / base && _num(c) > LONG_MAX % base)))
@@ -56,6 +56,14 @@ static long	_erange(long sign, long num, int c, int base)
 			|| (num == LONG_MAX / base && _num(c) > (LONG_MAX % base + 1))))
 		return (LONG_MIN);
 	return (num);
+}
+
+static long	_erange(char *current_ptr, char **endptr, long erange)
+{
+	errno = ERANGE;
+	if (endptr)
+		*endptr = current_ptr;
+	return (erange);
 }
 
 long	ft_strtol(const char *nptr, char **endptr, int base)
@@ -76,9 +84,9 @@ long	ft_strtol(const char *nptr, char **endptr, int base)
 	i = 0;
 	while (ft_isalnum(nptr[i]) && _num(nptr[i]) < base)
 	{
-		erange = _erange(sign, num, nptr[i], base);
+		erange = _check_erange(sign, num, nptr[i], base);
 		if (erange == LONG_MAX || erange == LONG_MIN)
-			return (errno = ERANGE, *endptr = (char *)(nptr + i), erange);
+			return (_erange((char *)(nptr + i), endptr, erange));
 		num = (num * base) + _num(nptr[i]);
 		++i;
 	}
