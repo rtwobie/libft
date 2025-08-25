@@ -51,16 +51,21 @@ static long	_check_erange(long sign, long num, int c, int base)
 {
 	if (sign == 1 && (num > LONG_MAX / base
 			|| (num == LONG_MAX / base && _num(c) > LONG_MAX % base)))
+	{
+		errno = ERANGE;
 		return (LONG_MAX);
+	}
 	else if (sign == -1 && (num > LONG_MAX / base
 			|| (num == LONG_MAX / base && _num(c) > (LONG_MAX % base + 1))))
+	{
+		errno = ERANGE;
 		return (LONG_MIN);
+	}
 	return (num);
 }
 
 static long	_erange(char *current_ptr, char **endptr, long erange)
 {
-	errno = ERANGE;
 	if (endptr)
 		*endptr = current_ptr;
 	return (erange);
