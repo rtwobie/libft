@@ -95,6 +95,7 @@ SRC			+= ft_lstmap.c
 SRC			+= ft_lstsize.c
 
 # math
+vpath %.c math/
 SRC			+= ft_abs.c
 
 OBJ			:= $(SRC:.c=.o)
