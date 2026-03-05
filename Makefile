@@ -94,6 +94,9 @@ SRC			+= ft_lstlast.c
 SRC			+= ft_lstmap.c
 SRC			+= ft_lstsize.c
 
+# math
+SRC			+= ft_abs.c
+
 OBJ			:= $(SRC:.c=.o)
 OBJ			:= $(addprefix $(OBJ_DIR)/, $(OBJ))
 
